@@ -9,4 +9,5 @@
                  [cheshire "5.5.0"]]
   :profiles {:dev
              {:resource-paths ["test-resources"]
-              :dependencies [[enlive "1.1.4"]]}})
+              :dependencies [[enlive "1.1.4"]
+                             [environ "1.0.2"]]}})
