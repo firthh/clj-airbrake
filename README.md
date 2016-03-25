@@ -62,6 +62,32 @@ Unsurprisingly, passing the configuration to `notify` for every single call coul
 
 Notify is also overloaded so if you just pass the airbrake configuration it will return a function that can be used to send a notification.
 
+## Using Environ
+
+If you're using `environ` (need to add link), you can use the `environ` namespace to pull the configuration from environment variables. The variables it will look for are `AIRBRAKE_API_KEY`, `AIRBRAKE_PROJECT`, and `ENVIRONMENT`. With these environment variables you can now do the following:
+
+```
+(require '[clj-airbrake.environ :as airbrake])
+
+(def request {:context {:url "http://example.com"
+                        :component "foo"
+                        :action "bar"
+                        :headers {"SERVER_NAME" "nginx", "HTTP_USER_AGENT" "Mozilla"}}
+              :params {"city" "LA", "state" "CA"}
+              :session {"user-id" "23"}})
+
+(def exception (try (throw (Exception. "Foo")) (catch Exception e e)) ; throw to get a stacktrace
+
+;; blocking notify
+(airbrake/notify exception request)
+
+;; or
+(airbrake/with-airbrake 
+    {} ;extra-data
+    (throw (Exception. "Foo")))
+
+```
+
 
 ## Request
 
