@@ -66,7 +66,7 @@ Notify is also overloaded so if you just pass the airbrake configuration it will
 
 If you're using `environ` (need to add link), you can use the `environ` namespace to pull the configuration from environment variables. The variables it will look for are `AIRBRAKE_API_KEY`, `AIRBRAKE_PROJECT`, and `ENVIRONMENT`. With these environment variables you can now do the following:
 
-```
+```clojure
 (require '[clj-airbrake.environ :as airbrake])
 
 (def request {:context {:url "http://example.com"
